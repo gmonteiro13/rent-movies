@@ -12,10 +12,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_201_208_211_830) do
+ActiveRecord::Schema.define(version: 20_201_210_180_920) do
   create_table 'movie_categories', force: :cascade do |t|
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end
+
+  create_table 'movies', force: :cascade do |t|
+    t.string 'name'
+    t.string 'director'
+    t.date 'release_date'
+    t.integer 'movie_category_id', null: false
+    t.integer 'running_time'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['movie_category_id'], name: 'index_movies_on_movie_category_id'
+  end
+
+  add_foreign_key 'movies', 'movie_categories'
 end
